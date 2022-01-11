@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, Image, SafeAreaView, ScrollView } from 'react-native';
 import { Feather } from '@expo/vector-icons';
@@ -8,6 +9,7 @@ import Categories from '../Categories';
 import PopularList from '../PopularList';
 
 const Home = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView
       contentInsetAdjustmentBehavior='automatic'
@@ -16,7 +18,12 @@ const Home = () => {
       <View style={styles.container}>
         <SafeAreaView>
           {/* Header */}
-          <View style={styles.headerWrapper}>
+          <View
+            style={[
+              styles.headerWrapper,
+              { marginTop: Platform.OS === 'android' ? 30 : 0 },
+            ]}
+          >
             <Image
               source={require('../../assets/images/profile.png')}
               style={styles.profileImage}
@@ -38,7 +45,7 @@ const Home = () => {
           {/* Categories */}
           <Categories />
           {/* Popular List */}
-          <PopularList />
+          <PopularList navigation={navigation} />
         </SafeAreaView>
       </View>
     </ScrollView>

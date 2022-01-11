@@ -4,15 +4,19 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import popular from '../../assets/data/popularData';
 import styles from './styles';
 import colors from '../../assets/colors/colors';
+import Deatils from '../Details';
 
 const lastElement = popular[popular.length - 1];
 
-const PopularList = () => {
+const PopularList = ({ navigation }) => {
   return (
     <View style={styles.popularWrapper}>
       <Text style={styles.popularTitle}>Popular</Text>
       {popular.map((item) => (
-        <TouchableOpacity key={item.id}>
+        <TouchableOpacity
+          key={item.id}
+          onPress={() => navigation.navigate('Details', { item: item })}
+        >
           <View
             style={[
               styles.popularCardWrapper,
@@ -32,7 +36,7 @@ const PopularList = () => {
                     size={12}
                     color={colors.primary}
                   />
-                  <Text style={styles.popularTopText}>top of the week</Text>
+                  <Text style={styles.popularTopText}>Top of the week</Text>
                 </View>
                 <View style={styles.popularTitlesWrapper}>
                   <Text style={styles.popularTitlesTitle}>{item.title}</Text>
